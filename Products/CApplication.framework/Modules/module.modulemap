@@ -1,0 +1,6 @@
+framework module CApplication {
+  umbrella header "CApplication.h"
+
+  export *
+  module * { export * }
+}
