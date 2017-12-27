@@ -16,6 +16,7 @@
 		84703D641FF2541500EB34F7 /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 84703D631FF2541500EB34F7 /* build.sh */; };
 		84703D651FF2542400EB34F7 /* CApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AFEABD1FED052400C8F00B /* CApplication.framework */; };
 		84703D661FF2542400EB34F7 /* CApplication.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84AFEABD1FED052400C8F00B /* CApplication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84703D6B1FF2558E00EB34F7 /* create_module.py in Resources */ = {isa = PBXBuildFile; fileRef = 84703D6A1FF2558E00EB34F7 /* create_module.py */; };
 		84AFEACE1FED052400C8F00B /* CApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AFEAC01FED052400C8F00B /* CApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AFEADA1FED056B00C8F00B /* CModuleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AFEAD81FED056B00C8F00B /* CModuleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AFEADB1FED056B00C8F00B /* CModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEAD91FED056B00C8F00B /* CModuleManager.m */; };
@@ -57,6 +58,7 @@
 		84703D5D1FF2540300EB34F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84703D5E1FF2540300EB34F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84703D631FF2541500EB34F7 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		84703D6A1FF2558E00EB34F7 /* create_module.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = create_module.py; sourceTree = "<group>"; };
 		84AFEABD1FED052400C8F00B /* CApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AFEAC01FED052400C8F00B /* CApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CApplication.h; sourceTree = "<group>"; };
 		84AFEAC11FED052400C8F00B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				84703D631FF2541500EB34F7 /* build.sh */,
+				84703D6A1FF2558E00EB34F7 /* create_module.py */,
 				84703D4E1FF2540300EB34F7 /* CApplicationDevelop */,
 				84AFEABF1FED052400C8F00B /* CApplication */,
 				84AFEABE1FED052400C8F00B /* Products */,
@@ -242,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84703D6B1FF2558E00EB34F7 /* create_module.py in Resources */,
 				84703D641FF2541500EB34F7 /* build.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
