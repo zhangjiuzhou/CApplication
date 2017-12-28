@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844D52491FF4C68C000AAB4F /* CAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 844D52471FF4C68C000AAB4F /* CAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		844D524A1FF4C68C000AAB4F /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D52481FF4C68C000AAB4F /* CAppDelegate.m */; };
 		84703D511FF2540300EB34F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84703D501FF2540300EB34F7 /* AppDelegate.m */; };
 		84703D541FF2540300EB34F7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84703D531FF2540300EB34F7 /* ViewController.m */; };
 		84703D571FF2540300EB34F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84703D551FF2540300EB34F7 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 		84703D651FF2542400EB34F7 /* CApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AFEABD1FED052400C8F00B /* CApplication.framework */; };
 		84703D661FF2542400EB34F7 /* CApplication.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84AFEABD1FED052400C8F00B /* CApplication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84703D6B1FF2558E00EB34F7 /* create_module.py in Resources */ = {isa = PBXBuildFile; fileRef = 84703D6A1FF2558E00EB34F7 /* create_module.py */; };
+		84AA2CE61FF37B31004037AD /* CURLRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AA2CE41FF37B31004037AD /* CURLRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84AA2CE71FF37B31004037AD /* CURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AA2CE51FF37B31004037AD /* CURLRouter.m */; };
 		84AFEACE1FED052400C8F00B /* CApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AFEAC01FED052400C8F00B /* CApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AFEADA1FED056B00C8F00B /* CModuleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AFEAD81FED056B00C8F00B /* CModuleManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AFEADB1FED056B00C8F00B /* CModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AFEAD91FED056B00C8F00B /* CModuleManager.m */; };
@@ -47,6 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		844D52471FF4C68C000AAB4F /* CAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
+		844D52481FF4C68C000AAB4F /* CAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAppDelegate.m; sourceTree = "<group>"; };
 		84703D4D1FF2540300EB34F7 /* CApplicationDevelop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CApplicationDevelop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84703D4F1FF2540300EB34F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84703D501FF2540300EB34F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,6 +65,8 @@
 		84703D5E1FF2540300EB34F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84703D631FF2541500EB34F7 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		84703D6A1FF2558E00EB34F7 /* create_module.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = create_module.py; sourceTree = "<group>"; };
+		84AA2CE41FF37B31004037AD /* CURLRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CURLRouter.h; sourceTree = "<group>"; };
+		84AA2CE51FF37B31004037AD /* CURLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CURLRouter.m; sourceTree = "<group>"; };
 		84AFEABD1FED052400C8F00B /* CApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AFEAC01FED052400C8F00B /* CApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CApplication.h; sourceTree = "<group>"; };
 		84AFEAC11FED052400C8F00B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +144,10 @@
 			children = (
 				84AFEAD81FED056B00C8F00B /* CModuleManager.h */,
 				84AFEAD91FED056B00C8F00B /* CModuleManager.m */,
+				84AA2CE41FF37B31004037AD /* CURLRouter.h */,
+				84AA2CE51FF37B31004037AD /* CURLRouter.m */,
+				844D52471FF4C68C000AAB4F /* CAppDelegate.h */,
+				844D52481FF4C68C000AAB4F /* CAppDelegate.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -148,6 +160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84AFEADA1FED056B00C8F00B /* CModuleManager.h in Headers */,
+				84AA2CE61FF37B31004037AD /* CURLRouter.h in Headers */,
+				844D52491FF4C68C000AAB4F /* CAppDelegate.h in Headers */,
 				84AFEACE1FED052400C8F00B /* CApplication.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +281,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84AA2CE71FF37B31004037AD /* CURLRouter.m in Sources */,
+				844D524A1FF4C68C000AAB4F /* CAppDelegate.m in Sources */,
 				84AFEADB1FED056B00C8F00B /* CModuleManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -430,7 +446,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

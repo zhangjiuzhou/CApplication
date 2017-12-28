@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <CApplication/CApplication.h>
 
 @interface ViewController ()
 
@@ -16,14 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    [CURLRouter setDefaultScheme:@"zjz"];
+    [[CURLRouter router] addRoute:@"/info/detail/:type/:id" callback:^(CURLParts *parts) {
+        NSLog(@"%@", parts);
+    }];
+    BOOL b = [CURLRouter openURL:[NSURL URLWithString:@"//info//////detail/12/1331?uid=SADFS"]];
+    NSLog(@"");
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end
