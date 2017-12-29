@@ -23,22 +23,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [CURLRouter setDefaultScheme:@"zjz"];
-    [[CURLRouter router] addRoute:@"/info/detail/:type/:id" callback:^(CURLParts *parts) {
-        NSLog(@"%@", parts);
+    [[CURLRouter router] addRoute:@"/info/list/:type" callback:^(CURLParts *parts) {
+        id vc = [CViewControllerFactory viewControllerWithClass:[IFListViewController class]
+                                                         params:parts.params];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
-    [CURLRouter openURL:[NSURL URLWithString:@"//info//////detail/12/1331?uid=SADFS"]];
 
-//    id vc = [CViewControllerFactory viewControllerWithClass:[IFListViewController class]
-//                                                     params:@{@"type":@"5"}];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self.navigationController pushViewController:vc animated:YES];
-//    });
-
-    [CURLRouter URLWithRoute:@"/:module/:page" params:@{
-                                                        @"module": @"fund",
-                                                        @"page": @"detail",
-                                                        @"id": @1001
-                                                        }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [CURLRouter openURL:[CURLRouter URLWithRoute:@"/info/list/:type" params:@{@"type": @15}]];
+    });
 }
 
 @end

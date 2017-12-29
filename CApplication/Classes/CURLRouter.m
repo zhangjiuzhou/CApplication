@@ -8,6 +8,7 @@
 #import "CURLRouter.h"
 
 static NSString * defaultScheme;
+static NSMutableDictionary<NSString *, CURLRouter *> *routers;
 
 @interface CURLParts ()
 
@@ -69,7 +70,8 @@ static NSString * defaultScheme;
 @interface CURLRouter ()
 
 @property (nonatomic, strong) NSMutableArray<CURLRoute *> *routes;
-@property (nonatomic, strong) NSMutableSet<NSString *> *registeredRoutes;
+@property (nonatomic, strong) NSMutableSet<NSString *> *routeStrings;
+@property (nonatomic, strong) NSMutableSet<NSString *> *compiledRouteStrings;
 
 @end
 
@@ -81,7 +83,6 @@ static NSString * defaultScheme;
 }
 
 + (instancetype)routerForScheme:(NSString *)scheme {
-    static NSMutableDictionary<NSString *, CURLRouter *> *routers;
     if (!routers) {
         routers = [NSMutableDictionary dictionary];
     }
@@ -100,6 +101,7 @@ static NSString * defaultScheme;
 
 + (BOOL)openURL:(NSURL *)URL {
     NSAssert(defaultScheme != nil, nil);
+
     NSURLComponents *components = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     NSString *scheme = components.scheme ? : defaultScheme;
     CURLRouter *router = [[self class] routerForScheme:scheme];
@@ -132,8 +134,13 @@ static NSString * defaultScheme;
     return [[self router] addRoute:route callback:callback];
 }
 
++ (NSURL *)URLWithRoute:(NSString *)route params:(NSDictionary *)params {
+    return [self URLWithScheme:nil route:route params:params];
+}
+
 + (NSURL *)URLWithScheme:(NSString *)scheme route:(NSString *)route params:(NSDictionary *)params {
-    [self _validateRoute:route];
+    NSAssert(routers[scheme] != nil, nil);
+    NSAssert([routers[scheme].routeStrings containsObject:route], nil);
 
     NSMutableArray *queryItems = [NSMutableArray array];
     for (NSString *paramName in params) {
@@ -158,37 +165,31 @@ static NSString * defaultScheme;
     return components.URL;
 }
 
-+ (NSURL *)URLWithRoute:(NSString *)route params:(NSDictionary *)params {
-    return [self URLWithScheme:nil route:route params:params];
+- (instancetype)init {
+    if (self = [super init]) {
+        self.routes = [NSMutableArray array];
+        self.routeStrings = [NSMutableSet set];
+        self.compiledRouteStrings = [NSMutableSet set];
+    }
+    return self;
 }
 
-+ (void)_validateRoute:(NSString *)route {
+- (void)addRoute:(NSString *)route callback:(CURLRouterCallback)callback {
     // 允许以下格式：
     // 1. 单个/
     // 2. 多个以/开始的部分，参数前带:。 如/foo/bar/:id
     NSString *pattern = @"^/$|^(/[A-Za-z0-9-:]+)+$";
     NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
     NSAssert([regExp numberOfMatchesInString:route options:0 range:NSMakeRange(0, route.length)] > 0, nil);
-}
-
-- (instancetype)init {
-    if (self = [super init]) {
-        self.routes = [NSMutableArray array];
-        self.registeredRoutes = [NSMutableSet set];
-    }
-    return self;
-}
-
-- (void)addRoute:(NSString *)route callback:(CURLRouterCallback)callback {
-    [[self class] _validateRoute:route];
 
     // 禁止重复定义
     // /foo/bar/:id和/foo/bar/:uid也算重复，因为参数位置一样
     CURLRoute *r = [self _createRoute:route callback:callback];
-    NSAssert(![self.registeredRoutes containsObject:r.regExp.pattern], nil);
+    NSAssert(![self.compiledRouteStrings containsObject:r.regExp.pattern], nil);
 
     [self.routes addObject:r];
-    [self.registeredRoutes addObject:r.regExp.pattern];
+    [self.routeStrings addObject:route];
+    [self.compiledRouteStrings addObject:r.regExp.pattern];
 }
 
 - (BOOL)_openURLWithURLComponents:(NSURLComponents *)components {
