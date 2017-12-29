@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CApplication/CAppDelegate.h>
 
-@interface MainAppEventListener : NSObject <CAppEventListener>
+@interface MainAppEventListener : NSObject <IAppEventListener>
 
 @end

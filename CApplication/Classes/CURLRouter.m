@@ -132,6 +132,45 @@ static NSString * defaultScheme;
     return [[self router] addRoute:route callback:callback];
 }
 
++ (NSURL *)URLWithScheme:(NSString *)scheme route:(NSString *)route params:(NSDictionary *)params {
+    [self _validateRoute:route];
+
+    NSMutableArray *queryItems = [NSMutableArray array];
+    for (NSString *paramName in params) {
+        NSString *placeholderName = [NSString stringWithFormat:@":%@", paramName];
+        NSString *value = [params[paramName] description];
+        if ([route rangeOfString:placeholderName].location != NSNotFound) {
+            route = [route stringByReplacingOccurrencesOfString:placeholderName withString:value];
+        } else {
+            NSURLQueryItem *queryItem = [NSURLQueryItem queryItemWithName:paramName value:value];
+            [queryItems addObject:queryItem];
+        }
+    }
+
+    if ([route rangeOfString:@":"].location != NSNotFound) {
+        return nil;
+    }
+
+    NSURLComponents *components = [NSURLComponents new];
+    components.scheme = scheme ? : defaultScheme;
+    components.path = route;
+    components.queryItems = queryItems;
+    return components.URL;
+}
+
++ (NSURL *)URLWithRoute:(NSString *)route params:(NSDictionary *)params {
+    return [self URLWithScheme:nil route:route params:params];
+}
+
++ (void)_validateRoute:(NSString *)route {
+    // 允许以下格式：
+    // 1. 单个/
+    // 2. 多个以/开始的部分，参数前带:。 如/foo/bar/:id
+    NSString *pattern = @"^/$|^(/[A-Za-z0-9-:]+)+$";
+    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
+    NSAssert([regExp numberOfMatchesInString:route options:0 range:NSMakeRange(0, route.length)] > 0, nil);
+}
+
 - (instancetype)init {
     if (self = [super init]) {
         self.routes = [NSMutableArray array];
@@ -141,12 +180,7 @@ static NSString * defaultScheme;
 }
 
 - (void)addRoute:(NSString *)route callback:(CURLRouterCallback)callback {
-    // 允许以下格式：
-    // 1. 单个/
-    // 2. 多个以/开始的部分，参数前带:。 如/foo/bar/:id
-    NSString * pattern = @"^/$|^(/[A-Za-z0-9-:]+)+$";
-    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
-    NSAssert([regExp numberOfMatchesInString:route options:0 range:NSMakeRange(0, route.length)] > 0, nil);
+    [[self class] _validateRoute:route];
 
     // 禁止重复定义
     // /foo/bar/:id和/foo/bar/:uid也算重复，因为参数位置一样

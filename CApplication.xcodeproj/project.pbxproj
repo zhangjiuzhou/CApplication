@@ -18,6 +18,9 @@
 		84703D651FF2542400EB34F7 /* CApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AFEABD1FED052400C8F00B /* CApplication.framework */; };
 		84703D661FF2542400EB34F7 /* CApplication.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84AFEABD1FED052400C8F00B /* CApplication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84703D6B1FF2558E00EB34F7 /* create_module.py in Resources */ = {isa = PBXBuildFile; fileRef = 84703D6A1FF2558E00EB34F7 /* create_module.py */; };
+		8487C9F81FF6199300FDD8F6 /* IFListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487C9F71FF6199300FDD8F6 /* IFListViewController.m */; };
+		8487C9FB1FF61F6E00FDD8F6 /* CViewControllerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8487C9F91FF61F6E00FDD8F6 /* CViewControllerFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8487C9FC1FF61F6E00FDD8F6 /* CViewControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8487C9FA1FF61F6E00FDD8F6 /* CViewControllerFactory.m */; };
 		84AA2CE61FF37B31004037AD /* CURLRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AA2CE41FF37B31004037AD /* CURLRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AA2CE71FF37B31004037AD /* CURLRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AA2CE51FF37B31004037AD /* CURLRouter.m */; };
 		84AFEACE1FED052400C8F00B /* CApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AFEAC01FED052400C8F00B /* CApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +66,10 @@
 		84703D5E1FF2540300EB34F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84703D631FF2541500EB34F7 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		84703D6A1FF2558E00EB34F7 /* create_module.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = create_module.py; sourceTree = "<group>"; };
+		8487C9F61FF6199300FDD8F6 /* IFListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IFListViewController.h; sourceTree = "<group>"; };
+		8487C9F71FF6199300FDD8F6 /* IFListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IFListViewController.m; sourceTree = "<group>"; };
+		8487C9F91FF61F6E00FDD8F6 /* CViewControllerFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewControllerFactory.h; sourceTree = "<group>"; };
+		8487C9FA1FF61F6E00FDD8F6 /* CViewControllerFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CViewControllerFactory.m; sourceTree = "<group>"; };
 		84AA2CE41FF37B31004037AD /* CURLRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CURLRouter.h; sourceTree = "<group>"; };
 		84AA2CE51FF37B31004037AD /* CURLRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CURLRouter.m; sourceTree = "<group>"; };
 		84AFEABD1FED052400C8F00B /* CApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +109,8 @@
 				84703D5A1FF2540300EB34F7 /* LaunchScreen.storyboard */,
 				84703D5D1FF2540300EB34F7 /* Info.plist */,
 				84703D5E1FF2540300EB34F7 /* main.m */,
+				8487C9F61FF6199300FDD8F6 /* IFListViewController.h */,
+				8487C9F71FF6199300FDD8F6 /* IFListViewController.m */,
 			);
 			path = CApplicationDevelop;
 			sourceTree = "<group>";
@@ -145,6 +154,8 @@
 				84AA2CE51FF37B31004037AD /* CURLRouter.m */,
 				844D52471FF4C68C000AAB4F /* CAppDelegate.h */,
 				844D52481FF4C68C000AAB4F /* CAppDelegate.m */,
+				8487C9F91FF61F6E00FDD8F6 /* CViewControllerFactory.h */,
+				8487C9FA1FF61F6E00FDD8F6 /* CViewControllerFactory.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -157,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84AFEADA1FED056B00C8F00B /* CModuleManager.h in Headers */,
+				8487C9FB1FF61F6E00FDD8F6 /* CViewControllerFactory.h in Headers */,
 				84AA2CE61FF37B31004037AD /* CURLRouter.h in Headers */,
 				844D52491FF4C68C000AAB4F /* CAppDelegate.h in Headers */,
 				84AFEACE1FED052400C8F00B /* CApplication.h in Headers */,
@@ -270,6 +282,7 @@
 				84703D541FF2540300EB34F7 /* ViewController.m in Sources */,
 				844D524D1FF5E26D000AAB4F /* MainAppEventListener.m in Sources */,
 				84703D5F1FF2540300EB34F7 /* main.m in Sources */,
+				8487C9F81FF6199300FDD8F6 /* IFListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84AA2CE71FF37B31004037AD /* CURLRouter.m in Sources */,
+				8487C9FC1FF61F6E00FDD8F6 /* CViewControllerFactory.m in Sources */,
 				844D524A1FF4C68C000AAB4F /* CAppDelegate.m in Sources */,
 				84AFEADB1FED056B00C8F00B /* CModuleManager.m in Sources */,
 			);

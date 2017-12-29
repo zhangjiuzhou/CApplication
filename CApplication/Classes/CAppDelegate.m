@@ -13,18 +13,18 @@ static CAppDelegate *appDelegate = nil;
 
 @interface CAppDelegate ()
 
-@property (nonatomic, strong) NSMutableSet<id<CAppEventListener>> *listeners;
+@property (nonatomic, strong) NSMutableSet<id<IAppEventListener>> *listeners;
 
 @end
 
 @implementation CAppDelegate
 
-+ (void)addEventListener:(id<CAppEventListener>)listener {
++ (void)addEventListener:(id<IAppEventListener>)listener {
     CAppDelegate *delegate = [self sharedDelegate];
     [delegate.listeners addObject:listener];
 }
 
-+ (void)removeEventListener:(id<CAppEventListener>)listener {
++ (void)removeEventListener:(id<IAppEventListener>)listener {
     CAppDelegate *delegate = [self sharedDelegate];
     [delegate.listeners removeObject:listener];
 }
@@ -51,7 +51,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(willFinishLaunchingWithOptions:)]) {
             if (![listener willFinishLaunchingWithOptions:launchOptions]) {
                 return NO;
@@ -62,7 +62,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(didFinishLaunchingWithOptions:)]) {
             if (![listener didFinishLaunchingWithOptions:launchOptions]) {
                 return NO;
@@ -73,7 +73,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(didBecomeActive)]) {
             [listener didBecomeActive];
         }
@@ -81,7 +81,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(willResignActive)]) {
             [listener willResignActive];
         }
@@ -89,7 +89,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(willEnterForeground)]) {
             [listener willEnterForeground];
         }
@@ -97,7 +97,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(didEnterBackground)]) {
             [listener didEnterBackground];
         }
@@ -105,7 +105,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(willTerminate)]) {
             [listener willTerminate];
         }
@@ -113,7 +113,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(didReceiveMemoryWarning)]) {
             [listener didReceiveMemoryWarning];
         }
@@ -121,7 +121,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(openURL:options:)]) {
             if ([listener openURL:url options:options]) {
                 return YES;
@@ -137,7 +137,7 @@ static CAppDelegate *appDelegate = nil;
 }
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
-    for (id<CAppEventListener> listener in self.listeners) {
+    for (id<IAppEventListener> listener in self.listeners) {
         if ([listener respondsToSelector:@selector(performActionForShortcutItem:completionHandler:)]) {
             if ([listener performActionForShortcutItem:shortcutItem completionHandler:completionHandler]) {
                 return;

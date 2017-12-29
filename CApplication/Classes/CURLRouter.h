@@ -26,6 +26,8 @@ typedef void (^CURLRouterCallback)(CURLParts *parts);
 + (void)setDefaultScheme:(NSString *)scheme;
 + (BOOL)openURL:(NSURL *)URL;
 + (void)addRoute:(NSString *)route callback:(CURLRouterCallback)callback;
++ (NSURL *)URLWithRoute:(NSString *)route params:(NSDictionary *)params;
++ (NSURL *)URLWithScheme:(NSString *)scheme route:(NSString *)route params:(NSDictionary *)params;
 
 - (void)addRoute:(NSString *)route callback:(CURLRouterCallback)callback;
 

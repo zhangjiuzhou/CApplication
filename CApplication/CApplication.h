@@ -19,3 +19,4 @@ FOUNDATION_EXPORT const unsigned char CApplicationVersionString[];
 #import <CApplication/CAppDelegate.h>
 #import <CApplication/CModuleManager.h>
 #import <CApplication/CURLRouter.h>
+#import <CApplication/CViewControllerFactory.h>

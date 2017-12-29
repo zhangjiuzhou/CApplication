@@ -22,7 +22,7 @@
         return instance; \
     } \
 
-@protocol CAppEventListener <NSObject>
+@protocol IAppEventListener <NSObject>
 
 @optional
 
@@ -41,7 +41,7 @@
 
 @interface CAppDelegate : NSObject <UIApplicationDelegate>
 
-+ (void)addEventListener:(id<CAppEventListener>)listener;
-+ (void)removeEventListener:(id<CAppEventListener>)listener;
++ (void)addEventListener:(id<IAppEventListener>)listener;
++ (void)removeEventListener:(id<IAppEventListener>)listener;
 
 @end
