@@ -9,6 +9,8 @@
 #import "CAppDelegate.h"
 #import "CURLRouter.h"
 
+static CAppDelegate *appDelegate = nil;
+
 @interface CAppDelegate ()
 
 @property (nonatomic, strong) NSMutableSet<id<CAppEventListener>> *listeners;
@@ -18,26 +20,40 @@
 @implementation CAppDelegate
 
 + (void)addEventListener:(id<CAppEventListener>)listener {
-    CAppDelegate *delegate = (CAppDelegate *)[UIApplication sharedApplication].delegate;
+    CAppDelegate *delegate = [self sharedDelegate];
     [delegate.listeners addObject:listener];
 }
 
 + (void)removeEventListener:(id<CAppEventListener>)listener {
-    CAppDelegate *delegate = (CAppDelegate *)[UIApplication sharedApplication].delegate;
+    CAppDelegate *delegate = [self sharedDelegate];
     [delegate.listeners removeObject:listener];
 }
 
++ (instancetype)sharedDelegate {
+    return [[self alloc] init];
+}
+
++ (instancetype)allocWithZone:(struct _NSZone *)zone {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        appDelegate = [super allocWithZone:zone];
+    });
+    return appDelegate;
+}
+
 - (instancetype)init {
-    if (self = [super init]) {
-        self.listeners = [NSMutableSet set];
-    }
-    return self;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        appDelegate = [super init];
+        appDelegate.listeners = [NSMutableSet set];
+    });
+    return appDelegate;
 }
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(application:willFinishLaunchingWithOptions:)]) {
-            if (![listener application:application willFinishLaunchingWithOptions:launchOptions]) {
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(willFinishLaunchingWithOptions:)]) {
+            if (![listener willFinishLaunchingWithOptions:launchOptions]) {
                 return NO;
             }
         }
@@ -46,9 +62,9 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(application:didFinishLaunchingWithOptions:)]) {
-            if (![listener application:application didFinishLaunchingWithOptions:launchOptions]) {
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(didFinishLaunchingWithOptions:)]) {
+            if (![listener didFinishLaunchingWithOptions:launchOptions]) {
                 return NO;
             }
         }
@@ -57,57 +73,57 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(applicationDidBecomeActive:)]) {
-            [listener applicationDidBecomeActive:application];
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(didBecomeActive)]) {
+            [listener didBecomeActive];
         }
     }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(applicationWillResignActive:)]) {
-            [listener applicationWillResignActive:application];
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(willResignActive)]) {
+            [listener willResignActive];
         }
     }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(applicationWillEnterForeground:)]) {
-            [listener applicationWillEnterForeground:application];
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(willEnterForeground)]) {
+            [listener willEnterForeground];
         }
     }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(applicationDidEnterBackground:)]) {
-            [listener applicationDidEnterBackground:application];
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(didEnterBackground)]) {
+            [listener didEnterBackground];
         }
     }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(applicationWillTerminate:)]) {
-            [listener applicationWillTerminate:application];
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(willTerminate)]) {
+            [listener willTerminate];
         }
     }
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(applicationDidReceiveMemoryWarning:)]) {
-            [listener applicationDidReceiveMemoryWarning:application];
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(didReceiveMemoryWarning)]) {
+            [listener didReceiveMemoryWarning];
         }
     }
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    for (id<UIApplicationDelegate> listener in self.listeners) {
-        if ([listener respondsToSelector:@selector(application:openURL:options:)]) {
-            if ([listener application:app openURL:url options:options]) {
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(openURL:options:)]) {
+            if ([listener openURL:url options:options]) {
                 return YES;
             }
         }
@@ -118,6 +134,16 @@
     }
 
     return NO;
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    for (id<CAppEventListener> listener in self.listeners) {
+        if ([listener respondsToSelector:@selector(performActionForShortcutItem:completionHandler:)]) {
+            if ([listener performActionForShortcutItem:shortcutItem completionHandler:completionHandler]) {
+                return;
+            }
+        }
+    }
 }
 
 @end

@@ -8,10 +8,11 @@
 #import <Foundation/Foundation.h>
 
 #define CExportModule(p) \
-+ (void)load { \
-    [[CModuleManager sharedManager] registerModuleWithProtocol:@protocol(p) class:[self class]]; \
-}
-#define CModule(p) [[CModuleManager sharedManager] moduleWithProtocol:@protocol(p)]
+    + (void)load { \
+        [[CModuleManager sharedManager] registerModuleWithProtocol:@protocol(p) class:[self class]]; \
+    }
+#define CModule(p) \
+    [[CModuleManager sharedManager] moduleWithProtocol:@protocol(p)]
 
 @interface CModuleManager : NSObject
 

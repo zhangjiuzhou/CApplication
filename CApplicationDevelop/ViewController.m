@@ -18,12 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"CApplication";
+    self.view.backgroundColor = [UIColor whiteColor];
+
     [CURLRouter setDefaultScheme:@"zjz"];
     [[CURLRouter router] addRoute:@"/info/detail/:type/:id" callback:^(CURLParts *parts) {
         NSLog(@"%@", parts);
     }];
-    BOOL b = [CURLRouter openURL:[NSURL URLWithString:@"//info//////detail/12/1331?uid=SADFS"]];
-    NSLog(@"");
+    [CURLRouter openURL:[NSURL URLWithString:@"//info//////detail/12/1331?uid=SADFS"]];
 }
 
 @end

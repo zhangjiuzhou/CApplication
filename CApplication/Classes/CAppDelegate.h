@@ -9,17 +9,33 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIApplication.h>
 
-@protocol CAppEventListener
+#define CExportAppEventListener \
+    + (void)load { \
+        [CAppDelegate addEventListener:[self sharedInstance]]; \
+    } \
+    + (instancetype)sharedInstance { \
+        static id instance; \
+        static dispatch_once_t onceToken; \
+        dispatch_once(&onceToken, ^{ \
+            instance = [self new]; \
+        }); \
+        return instance; \
+    } \
 
-- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
-- (void)applicationDidBecomeActive:(UIApplication *)application;
-- (void)applicationWillResignActive:(UIApplication *)application;
-- (void)applicationWillEnterForeground:(UIApplication *)application;
-- (void)applicationDidEnterBackground:(UIApplication *)application;
-- (void)applicationWillTerminate:(UIApplication *)application;
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application;
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options;
+@protocol CAppEventListener <NSObject>
+
+@optional
+
+- (BOOL)willFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+- (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+- (void)didBecomeActive;
+- (void)willResignActive;
+- (void)willEnterForeground;
+- (void)didEnterBackground;
+- (void)willTerminate;
+- (void)didReceiveMemoryWarning;
+- (BOOL)openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options;
+- (BOOL)performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler;
 
 @end
 
